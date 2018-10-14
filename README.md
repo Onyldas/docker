@@ -1,4 +1,5 @@
 THIS PROJECT CONSIST IN BUILDING DOCKER CONTAINERS WITH A WEB APP WHICH IS IN A DOCKER CONTAINER
+
 THIS APP MUST BE ABLE TO BUILD CUSTOMIZED DOCKER CONTAINERS AND LIST THEM
 
 I built the project with Spring Boot and Docker
@@ -22,7 +23,7 @@ docker build -f Dockerfile -t springdocker .
 
 To run the app :
 ```sh
-docker run -p 8080:8080 springdocker
+powershell docker run -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock springdocker
 ```
 Container with spring webapp is now launched on port 8080
 
