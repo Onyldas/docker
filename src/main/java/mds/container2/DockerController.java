@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,14 +28,19 @@ public class DockerController {
     }
 
     public void createContainer(){
-        CreateContainerResponse container = dockerClient.createContainerCmd("first").exec();
+        CreateContainerResponse container = dockerClient.createContainerCmd("ubuntu").exec();
         dockerClient.startContainerCmd(container.getId()).exec();
     }
 
     @GetMapping(path = "/dockerlist")
     public String dockerlist(Model model){
-        //createContainer();
+        createContainer();
         model.addAttribute("listContainers", listContainers());
+        return "dockerlist";
+    }
+    @PostMapping(path = "/dockerlist")
+    public String addContainer(@RequestParam String nom, Model model){
+        model.addAttribute("nom",nom);
         return "dockerlist";
     }
 

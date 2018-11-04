@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Liste des containers</title>
-    <link rel="stylesheet" href="/CSS/index.css" />
-    <link rel="stylesheet" href="/CSS/bootstrap.css" />
+    <link rel="stylesheet" href="/CSS/bootstrap.css"/>
+    <link rel="stylesheet" href="/CSS/index.css"/>
 </head>
 <body>
 <div class="container">
@@ -16,6 +16,22 @@
                 <td th:text="${container}"></td>
                 </br>
             </tr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" action="/dockerlist">
+                <label for="nom">Nom : </label>
+                <input type="text" name="nom" id="nom">
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p th:text="${nom}"></p>
         </div>
     </div>
 
