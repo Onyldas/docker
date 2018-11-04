@@ -1,16 +1,22 @@
 package mds.container2;
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.core.DockerClientBuilder;
+import org.apache.commons.lang.SystemUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @Controller
 public class DockerController {
+
+    //final String localDockerHost = SystemUtils.IS_OS_WINDOWS ? "tcp://localhost:2375" : "unix:///var/run/docker.sock";
 
     DockerClient dockerClient = DockerClientBuilder.getInstance("tcp://localhost:2375").build();
 
@@ -19,8 +25,14 @@ public class DockerController {
         return containers;
     }
 
+    public void createContainer(){
+        CreateContainerResponse container = dockerClient.createContainerCmd("first").exec();
+        dockerClient.startContainerCmd(container.getId()).exec();
+    }
+
     @GetMapping(path = "/dockerlist")
     public String dockerlist(Model model){
+        //createContainer();
         model.addAttribute("listContainers", listContainers());
         return "dockerlist";
     }
