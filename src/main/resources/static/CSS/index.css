@@ -29,6 +29,17 @@ header {
 .boite h3 a :hover{
     color: darkblue;
 }
+
+thead{
+    background-color: #9d9d9d;
+    color : #000000;
+    vertical-align: bottom;
+}
+
+tr{
+    border-left : 2px solid black;
+}
+
 /*[class*="col-"] {
     background-color: lightgreen;
     border: 2px solid black;

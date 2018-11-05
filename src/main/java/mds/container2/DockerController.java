@@ -27,19 +27,20 @@ public class DockerController {
         return containers;
     }
 
-    public void createContainer(){
-        CreateContainerResponse container = dockerClient.createContainerCmd("ubuntu").exec();
+    public void createContainer(String image){
+        CreateContainerResponse container = dockerClient.createContainerCmd(image).exec();
         dockerClient.startContainerCmd(container.getId()).exec();
     }
 
     @GetMapping(path = "/dockerlist")
     public String dockerlist(Model model){
-        createContainer();
         model.addAttribute("listContainers", listContainers());
         return "dockerlist";
     }
     @PostMapping(path = "/dockerlist")
     public String addContainer(@RequestParam String nom, Model model){
+        createContainer(nom);
+        model.addAttribute("listContainers", listContainers());
         model.addAttribute("nom",nom);
         return "dockerlist";
     }

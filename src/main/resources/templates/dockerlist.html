@@ -12,17 +12,28 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Voici la liste de tous les containers :</h1>
-            <tr th:each="container : ${listContainers}">
-                <td th:text="${container}"></td>
-                </br>
-            </tr>
+            <table>
+                <caption>Liste des containers</caption>
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                </tr>
+                </thead>
+                <tr th:each="container : ${listContainers}">
+                    <td th:text="${nom}"></td>
+                    <td th:text="${container.id}"></td>
+                    </br>
+                </tr>
+            </table>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
+            <h2>Ajouter un container :</h2>
             <form method="post" action="/dockerlist">
-                <label for="nom">Nom : </label>
+                <label for="nom">Nom de l'image : </label>
                 <input type="text" name="nom" id="nom">
                 <input type="submit">
             </form>
@@ -31,7 +42,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <p th:text="${nom}"></p>
+
         </div>
     </div>
 
